@@ -18,29 +18,33 @@ public class Main {
         int directionIndex = DIRECTIONS_MAP.get(initialDirection);
 
         for (char command : commands) {
-            switch (command) {
-                case 'f':
-                    position.put("z", position.get("z") + (directionIndex == 4 ? -1 : directionIndex == 5 ? 1 : 0));
-                    break;
-                case 'b':
-                    position.put("z", position.get("z") - (directionIndex == 4 ? -1 : directionIndex == 5 ? 1 : 0));
-                    break;
-                case 'l':
-                    directionIndex = (directionIndex + 1) % DIRECTIONS_MAP.size();
-                    break;
-                case 'r':
-                    directionIndex = (directionIndex - 1 + DIRECTIONS_MAP.size()) % DIRECTIONS_MAP.size();
-                    break;
-                case 'u':
-                    if (DIRECTIONS_MAP.get(initialDirection) != 'D') {
-                        position.put("y", position.get("y") + 1);
-                    }
-                    break;
-                case 'd':
-                    if (DIRECTIONS_MAP.get(initialDirection) != 'U') {
-                        position.put("y", position.get("y") - 1);
-                    }
-                    break;
+            try {
+                switch (command) {
+                    case 'f':
+                        position.put("z", position.get("z") + (directionIndex == 4 ? -1 : directionIndex == 5 ? 1 : 0));
+                        break;
+                    case 'b':
+                        position.put("z", position.get("z") - (directionIndex == 4 ? -1 : directionIndex == 5 ? 1 : 0));
+                        break;
+                    case 'l':
+                        directionIndex = (directionIndex + 1) % DIRECTIONS_MAP.size();
+                        break;
+                    case 'r':
+                        directionIndex = (directionIndex - 1 + DIRECTIONS_MAP.size()) % DIRECTIONS_MAP.size();
+                        break;
+                    case 'u':
+                        if (DIRECTIONS_MAP.get(initialDirection) != 'D') {
+                            position.put("y", position.get("y") + 1);
+                        }
+                        break;
+                    case 'd':
+                        if (DIRECTIONS_MAP.get(initialDirection) != 'U') {
+                            position.put("y", position.get("y") - 1);
+                        }
+                        break;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
 
@@ -58,8 +62,12 @@ public class Main {
         char startDirection = 'N';
         char[] commandList = {'f', 'r', 'u', 'b', 'l'};
 
-        Map<String, Integer> result = controlSpacecraft(startPosition, startDirection, commandList);
-        System.out.println("Final Position: (" + result.get("x") + ", " + result.get("y") + ", " + result.get("z") + ")");
-        System.out.println("Final Direction: " + (char) result.get("direction").intValue());
+        try {
+            Map<String, Integer> result = controlSpacecraft(startPosition, startDirection, commandList);
+            System.out.println("Final Position: (" + result.get("x") + ", " + result.get("y") + ", " + result.get("z") + ")");
+            System.out.println("Final Direction: " + (char) result.get("direction").intValue());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
