@@ -43,8 +43,7 @@ public class Main {
                         }
                         break;
                 }
-            } catch (Exception e) {
-                // Handle the exception, you can log it or take any appropriate action
+            } catch (Exception e)
                 e.printStackTrace();
             }
         }
