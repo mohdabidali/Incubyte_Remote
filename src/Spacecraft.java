@@ -2,7 +2,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Main {
-    private static final Map<Character, Integer> DIRECTIONS_MAP = new HashMap<>(); // Mapping of direction characters to indices
+    protected static final Map<Character, Integer> DIRECTIONS_MAP = new HashMap<>(); // Mapping of direction characters to indices
 
     static {
         DIRECTIONS_MAP.put('N', 0);
@@ -44,6 +44,7 @@ public class Main {
                         break;
                 }
             } catch (Exception e) {
+                // Handle the exception, you can log it or take any appropriate action
                 e.printStackTrace();
             }
         }
