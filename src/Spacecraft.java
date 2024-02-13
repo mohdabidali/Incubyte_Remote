@@ -141,7 +141,7 @@ public class SpaceCraft {
         // while user-input is not 'cc or 'C', take user input
         try (Scanner scanner = new Scanner(System.in)) {
             while (true) {
-                System.out.println("Enter input (f, b, l, r, u, d) or end input (c/C): ");
+                System.out.println("Enter direction (f, b, l, r, u, d) or end direction (c/C): ");
                 ch = scanner.nextLine();
 
                 // checking if user input is valid or not
