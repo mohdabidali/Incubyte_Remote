@@ -1,3 +1,21 @@
+Instructions to run the Java program --
+
+1.Check Java Version: Verify if Java is installed on your system and the version by running:  java -version
+
+
+2.Set Up Java Development Kit (JDK)
+
+3.Compile Java Files: Compile your Java source files using the javac command. Navigate to the directory containing your Java files and run:  javac SpaceCraftTest.java Spacecraft.java
+
+4. Execute Java Program: Run the main Java program using the java command. If the main method is in Spacecraft.java, run:  java Spacecraft
+
+
+
+
+
+
+
+
 Description
 As a scientist at ISRO controlling the latest lunar spacecraft Chandrayaan 3, your task is to develop a program that translates commands sent from Earth into instructions understood by the spacecraft. The spacecraft navigates through the galaxy using galactic coordinates, represented by x, y, z coordinates (x for east or west location, y for north or south location, and z for distance above or below the galactic plane).
 
