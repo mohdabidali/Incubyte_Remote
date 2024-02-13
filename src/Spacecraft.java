@@ -1,73 +1,194 @@
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.Scanner;
 
-public class Main {
-    protected static final Map<Character, Integer> DIRECTIONS_MAP = new HashMap<>(); // Mapping of direction characters to indices
+public class SpaceCraft {
+    private int[] position = new int[]{0, 0, 0};
+    private char direction = 'N';
 
-    static {
-        DIRECTIONS_MAP.put('N', 0);
-        DIRECTIONS_MAP.put('E', 1);
-        DIRECTIONS_MAP.put('S', 2);
-        DIRECTIONS_MAP.put('W', 3);
-        DIRECTIONS_MAP.put('U', 4);
-        DIRECTIONS_MAP.put('D', 5);
+    // Implementing getters & setters
+    public int[] getPosition() {
+        return position;
     }
 
-    public static Map<String, Integer> controlSpacecraft(Map<String, Integer> initialPosition, char initialDirection, char[] commands) {
-        Map<String, Integer> position = new HashMap<>(initialPosition);
-        int directionIndex = DIRECTIONS_MAP.get(initialDirection);
+    public char getDirection() {
+        return direction;
+    }
 
-        for (char command : commands) {
-            try {
-                switch (command) {
-                    case 'f':
-                        position.put("z", position.get("z") + (directionIndex == 4 ? -1 : directionIndex == 5 ? 1 : 0));
-                        break;
-                    case 'b':
-                        position.put("z", position.get("z") - (directionIndex == 4 ? -1 : directionIndex == 5 ? 1 : 0));
-                        break;
-                    case 'l':
-                        directionIndex = (directionIndex + 1) % DIRECTIONS_MAP.size();
-                        break;
-                    case 'r':
-                        directionIndex = (directionIndex - 1 + DIRECTIONS_MAP.size()) % DIRECTIONS_MAP.size();
-                        break;
-                    case 'u':
-                        if (DIRECTIONS_MAP.get(initialDirection) != 'D') {
-                            position.put("y", position.get("y") + 1);
-                        }
-                        break;
-                    case 'd':
-                        if (DIRECTIONS_MAP.get(initialDirection) != 'U') {
-                            position.put("y", position.get("y") - 1);
-                        }
-                        break;
+    public void setPosition(int x, int y, int z) {
+        position[0] = x;
+        position[1] = y;
+        position[2] = z;
+    }
+
+    public void setDirection(char dir) {
+        direction = dir;
+    }
+    // getters and setters completed
+
+    public void moveForward() {
+        // Implement forward movement
+        int x = position[0], y = position[1], z = position[2];
+        switch (direction) {
+            case 'N':
+                position[1]++;
+                break;
+            case 'S':
+                position[1]--;
+                break;
+            case 'E':
+                position[0]++;
+                break;
+            case 'W':
+                position[0]--;
+                break;
+            case 'U':
+                position[2]++;
+                break;
+            case 'D':
+                position[2]--;
+                break;
+        }
+    }
+
+    public void moveBackward() {
+        // Implement backward movement
+        int x = position[0], y = position[1], z = position[2];
+        switch (direction) {
+            case 'N':
+                position[1]--;
+                break;
+            case 'S':
+                position[1]++;
+                break;
+            case 'E':
+                position[0]--;
+                break;
+            case 'W':
+                position[0]++;
+                break;
+            case 'U':
+                position[2]--;
+                break;
+            case 'D':
+                position[2]++;
+                break;
+        }
+    }
+
+    public void turnLeft() {
+        // Implement left turn
+        switch (direction) {
+            case 'N':
+                direction = 'W';
+                break;
+            case 'S':
+                direction = 'E';
+                break;
+            case 'E':
+                direction = 'N';
+                break;
+            case 'W':
+                direction = 'S';
+                break;
+            case 'U':
+                direction = 'N';
+                break;
+            case 'D':
+                direction = 'S';
+                break;
+        }
+    }
+
+    public void turnRight() {
+        // Implement right turn
+        switch (direction) {
+            case 'N':
+                direction = 'E';
+                break;
+            case 'S':
+                direction = 'W';
+                break;
+            case 'E':
+                direction = 'S';
+                break;
+            case 'W':
+                direction = 'N';
+                break;
+            case 'U':
+                direction = 'S';
+                break;
+            case 'D':
+                direction = 'N';
+                break;
+        }
+    }
+
+    public void turnUp() {
+        // Implement up turn
+        direction = 'U';
+    }
+
+    public void turnDown() {
+        // Implement down turn
+        direction = 'D';
+    }
+
+    public void takeUserInput() {
+        // initializing variables
+        String ch;
+        ArrayList<String> inputList = new ArrayList<>();
+
+        // while user-input is not 'cc or 'C', take user input
+        try (Scanner scanner = new Scanner(System.in)) {
+            while (true) {
+                System.out.println("Enter input (f, b, l, r, u, d) or end input (c/C): ");
+                ch = scanner.nextLine();
+
+                // checking if user input is valid or not
+                // if invalid, then we do not append it to the inputList
+                // if input is 'c' or 'C', then we do not append it to the inputList
+                if ("fbldruc".contains(ch.toLowerCase())) {
+                    inputList.add(ch);
                 }
-            } catch (Exception e)
-                e.printStackTrace();
+                if (ch.equalsIgnoreCase("c")) {
+                    break;
+                }
             }
         }
 
-        Map<String, Integer> result = new HashMap<>(position);
-        result.put("direction", (int) initialDirection); // Store initial direction character
+        // iterating inputList elements via element variable, one by one
+        for (String element : inputList) {
+            switch (element) {
+                case "f":
+                    moveForward();
+                    break;
+                case "b":
+                    moveBackward();
+                    break;
+                case "l":
+                    turnLeft();
+                    break;
+                case "r":
+                    turnRight();
+                    break;
+                case "u":
+                    turnUp();
+                    break;
+                case "d":
+                    turnDown();
+                    break;
+                default:
+                    System.out.println("Unknown element in inputList: " + element);
+            }
+        }
 
-        return result;
+        // printing final output
+        System.out.println("Final Position: " + position[0] + ", " + position[1] + ", " + position[2]);
+        System.out.println("Final Direction: " + direction);
     }
 
     public static void main(String[] args) {
-        Map<String, Integer> startPosition = new HashMap<>();
-        startPosition.put("x", 0);
-        startPosition.put("y", 0);
-        startPosition.put("z", 0);
-        char startDirection = 'N';
-        char[] commandList = {'f', 'r', 'u', 'b', 'l'};
-
-        try {
-            Map<String, Integer> result = controlSpacecraft(startPosition, startDirection, commandList);
-            System.out.println("Final Position: (" + result.get("x") + ", " + result.get("y") + ", " + result.get("z") + ")");
-            System.out.println("Final Direction: " + (char) result.get("direction").intValue());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        SpaceCraft  spaceCraft = new SpaceCraft();
+        spaceCraft.takeUserInput();
     }
 }
