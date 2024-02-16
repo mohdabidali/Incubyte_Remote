@@ -27,7 +27,6 @@ public class SpaceCraft {
 
     public void moveForward() {
         // Implement forward movement
-        int x = position[0], y = position[1], z = position[2];
         switch (direction) {
             case 'N':
                 position[1]++;
@@ -46,13 +45,14 @@ public class SpaceCraft {
                 break;
             case 'D':
                 position[2]--;
+                break;
+            default:
                 break;
         }
     }
 
     public void moveBackward() {
         // Implement backward movement
-        int x = position[0], y = position[1], z = position[2];
         switch (direction) {
             case 'N':
                 position[1]--;
@@ -71,6 +71,8 @@ public class SpaceCraft {
                 break;
             case 'D':
                 position[2]++;
+                break;
+            default:
                 break;
         }
     }
@@ -96,6 +98,9 @@ public class SpaceCraft {
             case 'D':
                 direction = 'S';
                 break;
+            default:
+
+                break;
         }
     }
 
@@ -119,6 +124,8 @@ public class SpaceCraft {
                 break;
             case 'D':
                 direction = 'N';
+                break;
+            default:
                 break;
         }
     }
