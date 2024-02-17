@@ -92,7 +92,6 @@ public class SpaceCraftTest {
         spaceCraft.moveForward();
         // Assert that position remains at the maximum value
         assertArrayEquals(spaceCraft.getPosition(), new int[]{0, Integer.MAX_VALUE, 0});
-        ;
     }
 
     @Test
