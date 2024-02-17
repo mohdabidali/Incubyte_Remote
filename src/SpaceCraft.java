@@ -142,25 +142,26 @@ public class SpaceCraft {
 
     public void takeUserInput() {
         // initializing variables
-        String ch;
+        String userInput;
         ArrayList<String> inputList = new ArrayList<>();
 
         // while user-input is not 'cc or 'C', take user input
         try (Scanner scanner = new Scanner(System.in)) {
             while (true) {
-                System.out.println("Enter direction (f, b, l, r, u, d) or end direction (c/C): ");
-                ch = scanner.nextLine();
+                System.out.println("Enter direction (f, b, l, r, u, d) or end (c/C): ");
+                userInput = scanner.nextLine().toLowerCase(); // Convert input to lowercase for easier handling
 
-                // checking if user input is valid or not
-                // if invalid, then we do not append it to the inputList
-                // if input is 'c' or 'C', then we do not append it to the inputList
-                if ("fbldruc".contains(ch.toLowerCase())) {
-                    inputList.add(ch);
-                }
-                if (ch.equalsIgnoreCase("c")) {
+                if ("fbldru".contains(userInput)) {
+                    inputList.add(userInput);
+                } else if ("c".equalsIgnoreCase(userInput)) {
+                    inputList.add(userInput); // Add 'c' to the inputList before breaking
                     break;
+                } else {
+                    throw new IllegalArgumentException("Invalid input: " + userInput);
                 }
             }
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error: " + e.getMessage());
         }
 
         // iterating inputList elements via element variable, one by one
